@@ -73,7 +73,7 @@ export const constantRoutes = [
       {
         path: 'index',
         name: 'ProductManage',
-        component: () => import('@/views/form/index'),
+        component: () => import('@/views/ProductManage/index'),
         meta: { title: '商品管理', icon: 'example' }
       }
     ]
@@ -99,13 +99,13 @@ export const constantRoutes = [
     children: [
       {
         path: 'store',
-        name: 'Store',
+        name: 'StoreCoupon',
         component: () => import('@/views/form/index'),
         meta: { title: '门店抵用券', icon: 'form' }
       },
       {
         path: 'wash',
-        name: 'Wash',
+        name: 'WashCoupon',
         component: () => import('@/views/form/index'),
         meta: { title: '洗涤抵用券', icon: 'form' }
       }
@@ -146,20 +146,20 @@ export const constantRoutes = [
     meta: { title: '设置', icon: 'example' },
     children: [
       {
-        path: 'basic',
-        name: 'Basic',
+        path: 'basic-setting',
+        name: 'BasicSetting',
         component: () => import('@/views/form/index'),
         meta: { title: '基础设置', icon: 'form' }
       },
       {
-        path: 'trade',
-        name: 'Trade',
+        path: 'trade-setting',
+        name: 'TradeSetting',
         component: () => import('@/views/form/index'),
         meta: { title: '交易设置', icon: 'form' }
       },
       {
-        path: 'pay',
-        name: 'Pay',
+        path: 'pay-setting',
+        name: 'PaySetting',
         component: () => import('@/views/form/index'),
         meta: { title: '支付设置', icon: 'form' }
       },
@@ -170,8 +170,8 @@ export const constantRoutes = [
         meta: { title: '支付管理', icon: 'form' }
       },
       {
-        path: 'message',
-        name: 'Message',
+        path: 'message-setting',
+        name: 'MessageSetting',
         component: () => import('@/views/form/index'),
         meta: { title: '短信设置', icon: 'form' }
       },
@@ -247,12 +247,12 @@ export const constantRoutes = [
     ]
   },
   {
-    path: '/pay',
+    path: '/verify',
     component: Layout,
     children: [
       {
         path: 'index',
-        name: 'Pay',
+        name: 'verifyManage',
         component: () => import('@/views/form/index'),
         meta: { title: '核销', icon: 'example' }
       }

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { MessageBox, Message } from 'element-ui'
+import { Notification } from 'element-ui'
 import store from '@/store'
 import { getToken } from '@/utils/auth'
 
@@ -7,7 +7,7 @@ import { getToken } from '@/utils/auth'
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
   // withCredentials: true, // send cookies when cross-domain requests
-  timeout: 5000 // request timeout
+  timeout: 10000 // request timeout
 })
 
 // request interceptor
@@ -18,7 +18,7 @@ service.interceptors.request.use(
     if (store.getters.token) {
       config.data = {
         ...config.data,
-        access_token: getToken()
+        access_token1: getToken()
       }
     }
     return config
@@ -36,22 +36,21 @@ service.interceptors.response.use(
     const res = response.data
     // if the custom code is not 20000, it is judged as an error.
     if (res.code !== 'success') {
-      Message({
+      Notification({
+        title: '接口出错',
         message: res.msg || 'Error',
-        type: 'error',
-        duration: 5 * 1000
+        type: 'error'
       })
-      return Promise.reject(new Error(res.message || 'Error'))
+      throw Error(res.message || 'Error')
     } else {
-      return res
+      return res.data
     }
   },
   error => {
-    console.log('err' + error) // for debug
-    Message({
+    Notification({
+      title: '网络出错',
       message: error.message,
-      type: 'error',
-      duration: 5 * 1000
+      type: 'error'
     })
     return Promise.reject(error)
   }
