@@ -4,7 +4,7 @@
       <el-row>
         <el-col :span="6">
           <el-form-item label="状态：" prop="status">
-            <el-select v-model="searchForm.status" placeholder="请选择">
+            <el-select v-model.number="searchForm.status" placeholder="请选择">
               <el-option label="全部" :value="undefined"></el-option>
               <el-option label="上架中" :value="1"></el-option>
               <el-option label="下架中" :value="2"></el-option>
@@ -13,7 +13,7 @@
         </el-col>
         <el-col :span="6">
           <el-form-item label="ID：" prop="id">
-            <el-input v-model="searchForm.id" placeholder="请输入商品ID"></el-input>
+            <el-input v-model.number="searchForm.id" placeholder="请输入商品ID"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6" style="text-align:right;"><el-button type="primary" @click="initProductList">搜索</el-button><el-button @click="$refs.searchForm.resetFields()">重置</el-button></el-col>
@@ -46,7 +46,7 @@
       <el-table-column
         prop="image"
         label="图片"
-        width="120">
+        width="60">
         <template slot-scope="scope">
           <el-avatar shape="square" :src="scope.row.image"></el-avatar>
         </template>
@@ -139,7 +139,7 @@
       async getProductList () {
         const data = await getProductList({ page_size: this.pageSize, current_page: this.currentPage, ...this.searchForm })
         this.tableData = data.data.map(v => (v.image = process.env.VUE_APP_IMG_API + v.image) && v)
-        this.total = data.total_page * data.page_size
+        this.total = data.total_num
       },
       async deleteProduct ({ id }, index) {
         await deleteProduct({ id })
@@ -169,7 +169,7 @@
         this.initProductList()
       },
       handleCurrentChange(val) {
-        this.pageSize = val
+        this.currentPage = val
         this.getProductList()
       },
     }

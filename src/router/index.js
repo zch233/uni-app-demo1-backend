@@ -61,7 +61,7 @@ export const constantRoutes = [
       {
         path: 'index',
         name: 'VipManage',
-        component: () => import('@/views/form/index'),
+        component: () => import('@/views/VipManage/index'),
         meta: { title: '会员管理', icon: 'example' }
       }
     ]
