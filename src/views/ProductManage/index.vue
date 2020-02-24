@@ -20,13 +20,17 @@
       </el-row>
     </el-form>
     <el-row style="margin-bottom:20px;">
-      <el-col :span="24"><el-button @click="showProductEditForm({new:1})" type="success">新增商品</el-button></el-col>
+      <el-col :span="24">
+        <el-button @click="showProductEditForm({new:1})" type="success">新增商品</el-button>
+        <el-button v-show="selectedColumn.length" @click="batchProduct" type="warning">批量下架</el-button>
+      </el-col>
     </el-row>
     <el-table
       :data="tableData"
+      ref="table"
       border
       style="width: 100%"
-      @selection-change="handleSelectionChange">
+      @selection-change="selectedColumn=$event">
       <el-table-column
         type="selection"
         width="55">
@@ -108,7 +112,7 @@
 </template>
 
 <script>
-  import { getProductList, deleteProduct, editProduct } from './api.js'
+  import { getProductList, deleteProduct, editProduct, batchProduct } from './api.js'
   import ProductEdit from './components/ProductEdit'
 
   export default {
@@ -120,6 +124,7 @@
         productEditFormVisible: false,
         currentEditData: {},
         searchForm: {},
+        selectedColumn: [],
         tableData: [],
         total: 0,
         currentPage: 1,
@@ -145,6 +150,12 @@
         await editProduct({ id, status })
         this.$message({ message: '修改成功！', type: 'success' })
       },
+      async batchProduct () {
+        await batchProduct({ goods_id_arr: this.selectedColumn.map(v => v.id), status: 2 })
+        this.$message({ message: '批量下架成功！', type: 'success' })
+        this.$refs.table.setCurrentRow()
+        this.getProductList()
+      },
       showProductEditForm (data) {
         this.productEditFormVisible = true
         this.currentEditData = data
@@ -152,9 +163,6 @@
       initProductList () {
         this.currentPage = 1
         this.getProductList()
-      },
-      handleSelectionChange (e) {
-        console.log(e)
       },
       handleSizeChange(val) {
         this.pageSize = val

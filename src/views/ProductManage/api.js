@@ -31,3 +31,11 @@ export function deleteProduct(data) {
     data
   })
 }
+
+export function batchProduct(data) {
+  return request({
+    url: '/mango/goods_batch',
+    method: 'post',
+    data
+  })
+}
