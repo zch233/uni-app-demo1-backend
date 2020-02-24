@@ -158,18 +158,6 @@ export const constantRoutes = [
         meta: { title: '交易设置', icon: 'form' }
       },
       {
-        path: 'pay-setting',
-        name: 'PaySetting',
-        component: () => import('@/views/form/index'),
-        meta: { title: '支付设置', icon: 'form' }
-      },
-      {
-        path: 'pay-manage',
-        name: 'PayManage',
-        component: () => import('@/views/form/index'),
-        meta: { title: '支付管理', icon: 'form' }
-      },
-      {
         path: 'message-setting',
         name: 'MessageSetting',
         component: () => import('@/views/form/index'),

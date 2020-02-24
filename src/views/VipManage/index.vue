@@ -9,7 +9,7 @@
         </el-col>
         <el-col :span="6">
           <el-form-item label="等级：" prop="type">
-            <el-select v-model.number="searchForm.status" placeholder="请选择">
+            <el-select v-model.number="searchForm.type" placeholder="请选择">
               <el-option label="全部" :value="undefined"></el-option>
               <el-option label="普通会员" :value="1"></el-option>
               <el-option label="黄金会员" :value="2"></el-option>
