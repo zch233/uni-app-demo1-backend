@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Notification } from 'element-ui'
+import { Loading, Notification } from 'element-ui'
 import store from '@/store'
 import { getToken } from '@/utils/auth'
 
@@ -9,16 +9,21 @@ const service = axios.create({
   // withCredentials: true, // send cookies when cross-domain requests
   timeout: 10000 // request timeout
 })
-
+let requestLoading
 // request interceptor
 service.interceptors.request.use(
   config => {
     // do something before request is sent
-
-    if (store.getters.token) {
+    requestLoading = Loading.service({
+      lock: true,
+      text: '加载中...',
+      spinner: 'el-icon-loading',
+      background: 'hsla(0,0%,100%,.9)'
+    });
+    if (store.getters.token && !(config.data instanceof FormData)) {
       config.data = {
         ...config.data,
-        access_token1: getToken()
+        access_token: getToken()
       }
     }
     return config
@@ -33,6 +38,7 @@ service.interceptors.request.use(
 // response interceptor
 service.interceptors.response.use(
   response => {
+    requestLoading.close()
     const res = response.data
     // if the custom code is not 20000, it is judged as an error.
     if (res.code !== 'success') {
