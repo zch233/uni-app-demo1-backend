@@ -117,7 +117,6 @@
               formData = Object.assign({}, formData, { image: formData.image.replace(process.env.VUE_APP_IMG_API, '')})
             }
             formData.new ? await addProduct(formData) : await editProduct(formData)
-            this.resetForm()
             this.$emit('confirm')
           } else {
             this.$message({ message: '请输入正确的表单内容', type: 'error' })
