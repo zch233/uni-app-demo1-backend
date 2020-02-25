@@ -61,16 +61,12 @@
         </template>
       </el-table-column>
       <el-table-column
-        prop="title"
-        label="名称">
-      </el-table-column>
-      <el-table-column
         prop="nickname"
         label="昵称">
       </el-table-column>
       <el-table-column
-        prop="用户ID"
-        label="user_id">
+        prop="user_id"
+        label="用户ID">
       </el-table-column>
       <el-table-column
         prop="order_id"
@@ -115,7 +111,7 @@
         label="操作"
         width="80">
         <template slot-scope="scope">
-          <el-button @click="showProductEditForm(scope.row)" size="mini" type="primary">详情</el-button>
+          <el-button @click="showOrderDetail(scope.row)" size="mini" type="primary">详情</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -128,25 +124,25 @@
       layout="total, sizes, prev, pager, next, jumper"
       :total="total">
     </el-pagination>
-    <product-edit
-      :form-visible="productEditFormVisible"
+    <order-detail
+      :form-visible="orderDetailVisible"
       :current-edit-data="currentEditData"
-      @cancel="productEditFormVisible=false"
-      @confirm="productEditFormVisible=false, initProductList()"
-    ></product-edit>
+      @cancel="orderDetailVisible=false"
+      @confirm="orderDetailVisible=false, initProductList()"
+    ></order-detail>
   </div>
 </template>
 
 <script>
   import { getOrderList, editOrder } from './api.js'
-  import ProductEdit from './components/ProductEdit'
+  import OrderDetail from './components/OrderDetail'
 
   export default {
     name: 'ProductManage',
-    components: { ProductEdit },
+    components: { OrderDetail },
     data() {
       return {
-        productEditFormVisible: false,
+        orderDetailVisible: false,
         currentEditData: {},
         searchForm: {},
         tableData: [],
@@ -165,8 +161,8 @@
         this.tableData = data.data
         this.total = data.total_num
       },
-      showProductEditForm (data) {
-        this.productEditFormVisible = true
+      showOrderDetail (data) {
+        this.orderDetailVisible = true
         this.currentEditData = data
       },
       initProductList () {
