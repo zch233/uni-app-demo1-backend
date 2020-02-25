@@ -8,9 +8,17 @@ export function getVipList(data) {
   })
 }
 
-export function deleteVip(data) {
+export function editVip(data) {
   return request({
-    url: '/mango/goods_del',
+    url: '/mango/user_edit',
+    method: 'post',
+    data
+  })
+}
+
+export function userCount(data) {
+  return request({
+    url: '/mango/user_count',
     method: 'post',
     data
   })

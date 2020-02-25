@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container" v-loading="pageLoading">
+  <div class="app-container">
     <el-form ref="searchForm" :model="searchForm" label-width="80px">
       <el-row>
         <el-col :span="6">
@@ -120,7 +120,6 @@
     components: { ProductEdit },
     data() {
       return {
-        pageLoading: false,
         productEditFormVisible: false,
         currentEditData: {},
         searchForm: {},

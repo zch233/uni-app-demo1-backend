@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container" v-loading="pageLoading">
+  <div class="app-container">
     <el-form ref="searchForm" :model="searchForm" label-width="80px">
       <el-row>
         <el-col :span="6">
@@ -92,7 +92,7 @@
       :form-visible="vipDetailVisible"
       :current-edit-data="currentEditData"
       @cancel="vipDetailVisible=false"
-      @confirm="vipDetailVisible=false, initVipList()"
+      @confirm="initVipList()"
     ></vip-detail>
   </div>
 </template>
@@ -106,7 +106,6 @@
     components: { VipDetail },
     data() {
       return {
-        pageLoading: false,
         vipDetailVisible: false,
         currentEditData: {},
         searchForm: {},
