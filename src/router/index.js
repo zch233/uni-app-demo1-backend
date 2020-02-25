@@ -85,7 +85,7 @@ export const constantRoutes = [
       {
         path: 'index',
         name: 'OrderManage',
-        component: () => import('@/views/form/index'),
+        component: () => import('@/views/OrderManage/index'),
         meta: { title: '订单管理', icon: 'example' }
       }
     ]
