@@ -43,6 +43,7 @@
           </el-row>
           <el-row style="padding-top:15px;border-top:1px solid #f2f2f2;margin-top:10px;">
             <el-col :span="16">
+              <div>取件时间：{{ currentEditData.get_time && new Date(currentEditData.get_time * 1000).toLocaleString() }}</div>
               <div>买家备注：{{ currentEditData.remark || '无' }}</div>
               <div>订单备注：{{ currentEditData.in_remark || '无' }}</div>
             </el-col>
