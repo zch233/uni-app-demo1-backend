@@ -127,8 +127,9 @@
     <order-detail
       :form-visible="orderDetailVisible"
       :current-edit-data="currentEditData"
-      @cancel="orderDetailVisible=false"
-      @confirm="orderDetailVisible=false, initProductList()"
+      :props-status="status"
+      @cancel="orderDetailVisible=false, getOrderList()"
+      @confirm="getOrderList"
     ></order-detail>
   </div>
 </template>
@@ -138,7 +139,7 @@
   import OrderDetail from './components/OrderDetail'
 
   export default {
-    name: 'ProductManage',
+    name: 'OrderManage',
     components: { OrderDetail },
     data() {
       return {

@@ -1,4 +1,5 @@
 import router from './router'
+import store from './store'
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
 import { getToken } from '@/utils/auth' // get token from cookie
@@ -24,7 +25,14 @@ router.beforeEach(async(to, from, next) => {
       next({ path: '/' })
       NProgress.done()
     } else {
-      next()
+      const hasRoutes = store.getters.permission_routes && store.getters.permission_routes.length > 0
+      if (hasRoutes) {
+        next()
+      } else {
+        const accessRoutes = await store.dispatch('permission/generateRoutes')
+        router.addRoutes(accessRoutes)
+        next({ ...to, replace: true })
+      }
     }
   } else {
     /* has no token*/
