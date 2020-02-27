@@ -95,8 +95,15 @@
         pageSize: 10,
       }
     },
-    created () {
-      this.getCouponUserList()
+    watch: {
+      formVisible: {
+        immediate: true,
+        handler () {
+          if (this.formVisible === true) {
+            this.getCouponUserList()
+          }
+        }
+      }
     },
     methods: {
       async getCouponUserList () {

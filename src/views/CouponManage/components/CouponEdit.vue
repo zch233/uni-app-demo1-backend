@@ -83,11 +83,12 @@
       }
     },
     watch: {
-      currentEditData: {
-        deep: true,
+      formVisible: {
         immediate: true,
         handler () {
-          this.form = Object.assign({}, this.currentEditData)
+          if (this.formVisible === true) {
+            this.form = Object.assign({}, this.currentEditData)
+          }
         }
       }
     },
