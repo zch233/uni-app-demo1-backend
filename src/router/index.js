@@ -93,21 +93,21 @@ export const constantRoutes = [
   {
     path: '/coupon-manage',
     component: Layout,
-    redirect: '/coupon-manage/store',
+    redirect: '/coupon-manage/store-coupon',
     name: 'CouponManage',
     meta: { title: '优惠券管理', icon: 'example' },
     children: [
       {
-        path: 'store',
+        path: 'store-coupon',
         name: 'StoreCoupon',
-        component: () => import('@/views/form/index'),
-        meta: { title: '门店抵用券', icon: 'form' }
+        component: () => import('@/views/CouponManage/index'),
+        meta: { title: '门店抵用券', icon: 'form', type: 1 }
       },
       {
-        path: 'wash',
+        path: 'wash-coupon',
         name: 'WashCoupon',
-        component: () => import('@/views/form/index'),
-        meta: { title: '洗涤抵用券', icon: 'form' }
+        component: () => import('@/views/CouponManage/index'),
+        meta: { title: '洗涤抵用券', icon: 'form', type: 2 }
       }
     ]
   },

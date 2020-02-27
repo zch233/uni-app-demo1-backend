@@ -70,7 +70,7 @@
 </template>
 
 <script>
-  import { getProductList, editProduct, addProduct } from '../api.js'
+  import { editProduct, addProduct } from '../api.js'
   import { uploadImg } from '@/api/user.js'
   import myUpload from 'vue-image-crop-upload'
 
