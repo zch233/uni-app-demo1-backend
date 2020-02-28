@@ -58,6 +58,7 @@ service.interceptors.response.use(
       message: error.message,
       type: 'error'
     })
+    requestLoading.close()
     return Promise.reject(error)
   }
 )
