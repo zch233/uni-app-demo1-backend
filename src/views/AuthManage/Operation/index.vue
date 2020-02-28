@@ -21,7 +21,7 @@
     </el-form>
     <el-row style="margin-bottom:20px;">
       <el-col :span="24">
-        <el-button @click="showAdminEditForm({new:1})" type="success">新增角色</el-button>
+        <el-button @click="showAdminEditForm({new:1})" type="success">新增操作员</el-button>
         <el-button v-show="selectedColumn.length" @click="batchAdmin" type="warning">启用</el-button>
         <el-button v-show="selectedColumn.length" @click="batchAdmin" type="warning">禁用</el-button>
         <el-button v-show="selectedColumn.length" @click="batchAdmin" type="warning">删除</el-button>

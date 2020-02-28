@@ -105,7 +105,7 @@
         this.isIndeterminate = checkedCount > 0 && checkedCount < this.rights.length;
       },
       getRealRight (right) {
-        return right.map(v => this.rightList.map(v2 => v === v2.name && v2).filter(Boolean)).reduce((a, b) => a.concat(b), [])
+        return right.map(v => this.rightList.map(v2 => v === v2.name && v2.id).filter(Boolean)).reduce((a, b) => a.concat(b), [])
       },
       resetForm() {
         this.$refs.form.resetFields();
