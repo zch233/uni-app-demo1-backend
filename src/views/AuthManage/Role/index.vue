@@ -12,8 +12,8 @@
           </el-form-item>
         </el-col>
         <el-col :span="6">
-          <el-form-item label="ID：" prop="id">
-            <el-input v-model.number="searchForm.id" placeholder="请输入关键词"></el-input>
+          <el-form-item label="关键词：" prop="name">
+            <el-input v-model="searchForm.name" placeholder="请输入关键词"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="6" style="text-align:right;"><el-button type="primary" @click="initRoleList">搜索</el-button><el-button @click="$refs.searchForm.resetFields()">重置</el-button></el-col>
