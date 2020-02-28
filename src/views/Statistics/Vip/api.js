@@ -1,8 +1,8 @@
 import request from '@/utils/request'
 
-export function getPayList(data) {
+export function getUserLineData(data) {
   return request({
-    url: '/mango/coupon_data',
+    url: '/mango/user_line',
     method: 'post',
     data
   })
