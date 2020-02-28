@@ -98,7 +98,6 @@
         searchForm: {},
         selectedColumn: [],
         tableData: [],
-        status: { 1: '上架', 2: '下架', 3: '删除' },
       }
     },
     created () {
@@ -130,14 +129,6 @@
       },
       initRoleList () {
         this.currentPage = 1
-        this.getRoleList()
-      },
-      handleSizeChange(val) {
-        this.pageSize = val
-        this.initRoleList()
-      },
-      handleCurrentChange(val) {
-        this.currentPage = val
         this.getRoleList()
       },
     }
