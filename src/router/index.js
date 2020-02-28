@@ -120,13 +120,13 @@ export const constantRoutes = [
     children: [
       {
         path: 'role',
-        name: 'Role',
+        name: 'RoleManage',
         component: () => import('@/views/AuthManage/Role'),
         meta: { title: '角色管理', icon: 'form' }
       },
       {
         path: 'operation',
-        name: 'Operation',
+        name: 'OperationManage',
         component: () => import('@/views/AuthManage/Operation'),
         meta: { title: '操作员管理', icon: 'form' }
       },
@@ -148,25 +148,25 @@ export const constantRoutes = [
       {
         path: 'basic-setting',
         name: 'BasicSetting',
-        component: () => import('@/views/form/index'),
+        component: () => import('@/views/Setting/Basic/index'),
         meta: { title: '基础设置', icon: 'form' }
       },
       {
         path: 'trade-setting',
         name: 'TradeSetting',
-        component: () => import('@/views/form/index'),
+        component: () => import('@/views/Setting/Trade/index'),
         meta: { title: '交易设置', icon: 'form' }
       },
       {
         path: 'message-setting',
         name: 'MessageSetting',
-        component: () => import('@/views/form/index'),
+        component: () => import('@/views/Setting/Message/index'),
         meta: { title: '短信设置', icon: 'form' }
       },
       {
         path: 'news',
         name: 'News',
-        component: () => import('@/views/form/index'),
+        component: () => import('@/views/Setting/News/index'),
         meta: { title: '消息推送', icon: 'form' }
       }
     ]
@@ -180,20 +180,20 @@ export const constantRoutes = [
     children: [
       {
         path: 'pay',
-        name: 'Pay',
-        component: () => import('@/views/form/index'),
+        name: 'PayStatistics',
+        component: () => import('@/views/Statistics/Pay/index'),
         meta: { title: '核销统计', icon: 'form' }
       },
       {
         path: 'order',
-        name: 'Order',
-        component: () => import('@/views/form/index'),
+        name: 'OrderStatistics',
+        component: () => import('@/views/Statistics/Order/index'),
         meta: { title: '订单统计', icon: 'form' }
       },
       {
         path: 'vip',
-        name: 'Vip',
-        component: () => import('@/views/form/index'),
+        name: 'VipStatistics',
+        component: () => import('@/views/Statistics/Vip/index'),
         meta: { title: '会员统计', icon: 'form' }
       }
     ]
@@ -205,7 +205,7 @@ export const constantRoutes = [
       {
         path: 'index',
         name: 'Finance',
-        component: () => import('@/views/form/index'),
+        component: () => import('@/views/Finance/index'),
         meta: { title: '财务', icon: 'example' }
       }
     ]
