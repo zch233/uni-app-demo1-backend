@@ -59,7 +59,7 @@
   import { getPayList } from './api.js'
 
   export default {
-    name: 'Finance',
+    name: 'PayStatistics',
     data() {
       return {
         searchForm: {},
