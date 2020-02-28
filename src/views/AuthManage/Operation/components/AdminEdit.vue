@@ -61,7 +61,7 @@
         form: {},
         rules: {
           user_login: [{ required: true, message: '管理员登录账号不能为空' }],
-          user_password: [{ required: true, message: '管理员登录密码不能为空' }],
+          user_password: [{ required: false, message: '管理员登录密码不能为空' }],
           role_id: [{ required: true, message: '角色ID不能为空' }],
         },
       }
