@@ -101,12 +101,8 @@
   import myUpload from 'vue-image-crop-upload'
 
   export default {
-    name: 'ProductEdit',
+    name: 'BasicSetting',
     components: { myUpload },
-    props: {
-      formVisible: Boolean,
-      currentEditData: Object
-    },
     data() {
       return {
         myUploadVisible: false,
@@ -122,15 +118,6 @@
           price: [{ required: true, message: '商品价格不能为空' }],
           number: [{ required: true, message: '商品价销量不能为空' }],
         },
-      }
-    },
-    watch: {
-      currentEditData: {
-        deep: true,
-        immediate: true,
-        handler () {
-          this.form = Object.assign({}, this.currentEditData)
-        }
       }
     },
     methods: {
@@ -156,9 +143,6 @@
       async cropSuccess (imageDataUrl) {
         this.form.image = imageDataUrl
       },
-      resetForm() {
-        this.$refs.form.resetFields();
-      }
     }
   }
 </script>
