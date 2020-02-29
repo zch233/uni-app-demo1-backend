@@ -63,10 +63,10 @@
     <el-form ref="configForm" :model="configForm" label-width="120px">
       <el-row>
         <el-col :span="24">
-          <el-form-item label="手机号绑定" prop="goods_code">
-            <el-radio-group :disabled="configFormDisabled" v-model="configForm.goods_code">
-              <el-radio :label="1">是</el-radio>
-              <el-radio :label="2">否</el-radio>
+          <el-form-item label="手机号绑定" prop="bind_phone.value">
+            <el-radio-group :disabled="configFormDisabled" v-model="configForm.bind_phone.value">
+              <el-radio label="1">是</el-radio>
+              <el-radio label="2">否</el-radio>
             </el-radio-group>
           </el-form-item>
         </el-col>
@@ -124,7 +124,8 @@
         imageFormDisabled: true,
         configFormDisabled: true,
         imageForm: {},
-        configForm: { shop_coupon: {}, wash_coupon: {} },
+        imageArr: ['logo', 'icon', 'image1', 'image2', 'image3'],
+        configForm: { shop_coupon: {}, wash_coupon: {}, bind_phone: {} },
       }
     },
     created () {
@@ -135,6 +136,7 @@
       async getImageConfig () {
         const data = await getImageConfig()
         this.imageForm = data
+        this.imageArr.map(v => (data[v] = process.env.VUE_APP_IMG_API + data[v]))
       },
       async getGlobalConfig () {
         const data = await getGlobalConfig()
@@ -144,16 +146,16 @@
         this.$refs.imageForm.validate(async (valid) => {
           if (valid) {
             let formData = this.imageForm
-            const imageArr = ['logo', 'icon', 'image1', 'image2', 'image3']
-            for (let v = 0; v < imageArr.length; v ++) {
-              if (formData[imageArr[v]].indexOf(';base64,') >= 0) {
-                const data = await uploadImg(formData[imageArr[v]])
-                formData = Object.assign({}, formData, { [imageArr[v]]: data.image })
+            for (let v = 0; v < this.imageArr.length; v ++) {
+              if (formData[this.imageArr[v]].indexOf(';base64,') >= 0) {
+                const data = await uploadImg(formData[this.imageArr[v]])
+                formData = Object.assign({}, formData, { [this.imageArr[v]]: data.image })
               } else {
-                formData = Object.assign({}, formData, { [imageArr[v]]: formData[imageArr[v]].replace(process.env.VUE_APP_IMG_API, '')})
+                formData = Object.assign({}, formData, { [this.imageArr[v]]: formData[this.imageArr[v]].replace(process.env.VUE_APP_IMG_API, '')})
               }
             }
             await editImageConfig(formData)
+            this.imageFormDisabled = true
             this.$message({ message: '修改图片配置成功', type: 'success' })
           } else {
             this.$message({ message: '请输入正确的表单内容', type: 'error' })
@@ -164,7 +166,12 @@
       async editGlobalConfig (form) {
         this.$refs.configForm.validate(async (valid) => {
           if (valid) {
-            await editGlobalConfig(this.configForm)
+            const formData = {}
+            for (let i in this.configForm) {
+              formData[i] = this.configForm[i].value
+            }
+            await editGlobalConfig(formData)
+            this.configFormDisabled = true
             this.$message({ message: '修改配置成功', type: 'success' })
           } else {
             this.$message({ message: '请输入正确的表单内容', type: 'error' })

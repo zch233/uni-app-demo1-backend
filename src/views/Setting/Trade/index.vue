@@ -25,7 +25,7 @@
     <div class="dialog-footer">
       <el-button type="success" v-show="formDisabled" @click="formDisabled = false">编 辑</el-button>
       <el-button v-show="!formDisabled" @click="formDisabled = true">取 消</el-button>
-      <el-button v-show="!formDisabled" type="primary" @click="save">保 存</el-button>
+      <el-button v-show="!formDisabled" type="primary" @click="editGlobalConfig">保 存</el-button>
     </div>
   </div>
 </template>
@@ -52,7 +52,12 @@
       async editGlobalConfig (form) {
         this.$refs.form.validate(async (valid) => {
           if (valid) {
-            await editGlobalConfig(this.form)
+            const formData = {}
+            for (let i in this.form) {
+              formData[i] = this.form[i].value
+            }
+            await editGlobalConfig(formData)
+            this.formDisabled = true
             this.$message({ message: '修改配置成功', type: 'success' })
           } else {
             this.$message({ message: '请输入正确的表单内容', type: 'error' })

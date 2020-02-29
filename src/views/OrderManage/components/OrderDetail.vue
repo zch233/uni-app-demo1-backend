@@ -115,7 +115,7 @@
 
 <script>
   import { editOrder } from '../api.js'
-  import { regionData, CodeToText, TextToCode } from 'element-china-area-data'
+  import { regionData, CodeToText } from 'element-china-area-data'
 
   export default {
     name: 'OrderDetail',
@@ -145,7 +145,7 @@
           if (valid) {
             const orderFormData = this.orderForm
             const newAddressData = (orderFormData.addressData && Object.keys(orderFormData.addressData) > 0) ? { province: CodeToText[orderFormData.addressData[0]], city: CodeToText[orderFormData.addressData[1]], district: CodeToText[orderFormData.addressData[2]] } : {}
-            const newAddressInfo = (orderFormData.addressInfo && Object.keys(orderFormData.addressInfo) > 0 ) ? { address: orderFormData.addressInfo } : {}
+            const newAddressInfo = orderFormData.addressInfo ? { address: orderFormData.addressInfo } : {}
             const data = Object.assign({ id: orderFormData.id, nickname: this.orderForm.nickname, mobile: this.orderForm.mobile }, newAddressData, newAddressInfo)
             await editOrder(data)
             Object.assign(this.currentEditData, data)

@@ -217,7 +217,7 @@ export const constantRoutes = [
       {
         path: 'index',
         name: 'StoreManage',
-        component: () => import('@/views/form/index'),
+        component: () => import('@/views/StoreManage/index'),
         meta: { title: '门店管理', icon: 'example' }
       }
     ]
@@ -229,7 +229,7 @@ export const constantRoutes = [
       {
         path: 'index',
         name: 'Store',
-        component: () => import('@/views/form/index'),
+        component: () => import('@/views/Store/index'),
         meta: { title: '门店', icon: 'example' }
       }
     ]
@@ -240,8 +240,8 @@ export const constantRoutes = [
     children: [
       {
         path: 'index',
-        name: 'verifyManage',
-        component: () => import('@/views/form/index'),
+        name: 'verify',
+        component: () => import('@/views/Verify/index'),
         meta: { title: '核销', icon: 'example' }
       }
     ]
