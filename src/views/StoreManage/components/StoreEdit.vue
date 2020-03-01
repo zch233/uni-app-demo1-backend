@@ -1,7 +1,12 @@
 <template>
-  <el-dialog title="编辑商品" @closed="resetForm" width="800px" :visible.sync="formVisible" :close-on-click-modal="false" :show-close="false">
+  <el-dialog title="编辑门店" @closed="resetForm" width="800px" :visible.sync="formVisible" :close-on-click-modal="false" :show-close="false">
     <el-form ref="form" :model="form" :rules="rules" label-width="80px">
       <el-row>
+        <el-col :span="12">
+          <el-form-item v-if="form.id" label="门店ID" prop="id">
+            <el-input v-model="form.id" disabled></el-input>
+          </el-form-item>
+        </el-col>
         <el-col :span="12">
           <el-form-item label="门店名称" prop="shop_name">
             <el-input v-model="form.shop_name" placeholder="请输入门店名称"></el-input>

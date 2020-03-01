@@ -2,13 +2,14 @@
   <div class="app-container">
     <el-row style="margin-bottom:20px;">
       <el-col :span="12">
-        <el-avatar shape="square" size="large" src="squareUrl"></el-avatar>
-        <el-tag>运营中</el-tag>
-        <el-button type="primary" icon="el-icon-s-tools" circle></el-button>
+        <el-avatar :size="70" :src="storeInfo.image"></el-avatar>
+        <el-tag v-if="storeInfo.status === 1">运营中</el-tag>
+        <el-tag type="danger" v-else>停运</el-tag>
+        <el-button type="primary" size="small" icon="el-icon-s-tools" circle  @click="storeEditFormVisible = true"></el-button>
       </el-col>
       <el-col :span="12" style="text-align:right;">
-        <el-input placeholder="请输入运单号" v-model="input2">
-          <template slot="append">签收</template>
+        <el-input placeholder="请输入运单号" v-model="mail_no" @keydown.13="signOrder">
+          <template slot="append"><el-button type="primary" @click="signOrder">签收</el-button></template>
         </el-input>
       </el-col>
     </el-row>
@@ -41,7 +42,7 @@
         <el-input v-model="searchForm.order_id" placeholder="请输入订单号"></el-input>
       </el-form-item>
       <el-form-item label="">
-        <el-button type="primary" @click="initProductList">搜索</el-button><el-button @click="$refs.searchForm.resetFields()">重置</el-button>
+        <el-button type="primary" @click="initStoreOrderList">搜索</el-button><el-button @click="$refs.searchForm.resetFields()">重置</el-button>
       </el-form-item>
     </el-form>
     <el-table
@@ -97,10 +98,10 @@
       <el-table-column
         fixed="right"
         label="操作"
-        width="140">
+        width="150">
         <template slot-scope="scope">
-          <el-button @click="showProductEditForm(scope.row)" size="mini" type="success">发货</el-button>
-          <el-button @click="showProductEditForm(scope.row)" size="mini" type="primary">详情</el-button>
+          <el-button :disabled="scope.row.status !== 4" size="mini" type="success" @click="sendOrder(scope.row)">发货</el-button>
+          <el-button size="mini" type="primary">详情</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -115,25 +116,31 @@
     </el-pagination>
     <store-edit
       :form-visible="storeEditFormVisible"
-      :current-edit-data="currentEditData"
+      :current-edit-data="storeInfo"
       @cancel="storeEditFormVisible=false"
-      @confirm="storeEditFormVisible=false, initProductList()"
+      @confirm="storeEditFormVisible=false, getStoreInfo()"
     ></store-edit>
   </div>
 </template>
 
 <script>
-  import { getStoreOrderList } from './api.js'
-  import StoreEdit from './components/StoreEdit'
+  import { getStoreOrderList, signOrder, sendOrder } from './api.js'
+  import { getStoreList } from '../StoreManage/api.js'
+  import StoreEdit from '../StoreManage/components/StoreEdit'
+  import { mapGetters } from 'vuex'
 
   export default {
     name: 'Store',
     components: { StoreEdit },
+    computed: {
+      ...mapGetters(['shop_id'])
+    },
     data() {
       return {
         storeEditFormVisible: false,
-        currentEditData: {},
+        storeInfo: {},
         searchForm: {},
+        mail_no: '',
         tableData: [],
         total: 0,
         currentPage: 1,
@@ -143,6 +150,7 @@
     },
     created () {
       this.getStoreOrderList()
+      this.getStoreInfo(this.shop_id)
     },
     methods: {
       async getStoreOrderList () {
@@ -150,17 +158,45 @@
         this.tableData = data.data
         this.total = data.total_num
       },
-      showProductEditForm (data) {
-        this.storeEditFormVisible = true
-        this.currentEditData = data
+      async getStoreInfo (id) {
+        const data = await getStoreList({ id })
+        this.storeInfo = data.data[0]
+        this.storeInfo.image = process.env.VUE_APP_IMG_API + this.storeInfo.image
       },
-      initProductList () {
+      async signOrder () {
+        if (this.mail_no === '') {
+          this.$message({ message: '请输入运单号！', type: 'error' })
+          return
+        }
+        await signOrder({ mail_no: this.mail_no })
+        this.$message({ message: '签收成功！', type: 'success' })
+        this.initStoreOrderList()
+      },
+      sendOrder ({ order_id }) {
+        this.$confirm('点击确认将发货并自动生成运单号, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(async () => {
+          await sendOrder({ order_id })
+          this.$message({
+            type: 'success',
+            message: '发货成功!'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消发货'
+          });          
+        });
+      },
+      initStoreOrderList () {
         this.currentPage = 1
         this.getStoreOrderList()
       },
       handleSizeChange(val) {
         this.pageSize = val
-        this.initProductList()
+        this.initStoreOrderList()
       },
       handleCurrentChange(val) {
         this.currentPage = val
