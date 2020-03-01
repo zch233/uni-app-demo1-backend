@@ -27,6 +27,12 @@ export default {
       this.chart = echarts.init(document.getElementById('chart'))
       const data = await this.getUserLineData()
       this.chart.setOption({
+        title: {
+          text: '会员统计'
+        },
+        tooltip: {
+          trigger: 'axis'
+        },
         xAxis: {
           type: 'category',
           data: data[0]
