@@ -1,8 +1,8 @@
 <template>
-  <el-dialog title="领取详情" @closed="resetForm" width="800px" :visible.sync="formVisible" :close-on-click-modal="false" :before-close="() => $emit('cancel')">
+  <el-dialog title="领取详情" @closed="resetForm" width="900px" :visible.sync="formVisible" :close-on-click-modal="false" :before-close="() => $emit('cancel')">
     <el-form ref="searchForm" :model="searchForm" label-width="80px">
       <el-row>
-        <el-col :span="11">
+        <el-col :span="16">
           <el-form-item label="日期：" prop="status">
             <el-date-picker
               v-model.number="searchForm.start_time"
@@ -19,7 +19,7 @@
             </el-date-picker>
           </el-form-item>
         </el-col>
-        <el-col :span="6" style="text-align:right;"><el-button type="primary" @click="initCouponUserList">搜索</el-button><el-button @click="$refs.searchForm.resetFields()">重置</el-button></el-col>
+        <el-col :span="5" style="text-align:right;"><el-button type="primary" @click="initCouponUserList">搜索</el-button><el-button @click="$refs.searchForm.resetFields()">重置</el-button></el-col>
       </el-row>
     </el-form>
     <el-table

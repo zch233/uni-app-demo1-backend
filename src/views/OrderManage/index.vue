@@ -77,8 +77,8 @@
         label="运单号">
         <template slot-scope="scope">
           <p v-if="scope.row.mailno1">收：{{ scope.row.mailno1 }}</p>
-          <p v-else-if="scope.row.mailno2">发：{{ scope.row.mailno2 }}</p>
-          <p v-else>暂无</p>
+          <p v-if="scope.row.mailno2">发：{{ scope.row.mailno2 }}</p>
+          <p v-if="!scope.row.mailno1 && !scope.row.mailno2">暂无</p>
         </template>
       </el-table-column>
       <el-table-column
