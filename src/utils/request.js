@@ -43,7 +43,7 @@ service.interceptors.response.use(
     // if the custom code is not 20000, it is judged as an error.
     if (res.code !== 'success') {
       Notification({
-        title: '接口出错',
+        title: '出错啦~',
         message: res.msg || 'Error',
         type: 'error'
       })
