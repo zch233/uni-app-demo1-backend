@@ -1,5 +1,5 @@
 import { login, logout } from '@/api/user'
-import { getToken, setToken, removeToken, getName, setName, removeName, getRoleId, setRoleId, removeRoleId } from '@/utils/auth'
+import { getToken, setToken, removeToken, getName, setName, removeName, getRoleId, setRoleId, removeRoleId, getShopId, setShopId, removeShopId } from '@/utils/auth'
 import { resetRouter } from '@/router'
 
 const getDefaultState = () => {
@@ -7,7 +7,8 @@ const getDefaultState = () => {
     token: getToken(),
     name: getName(),
     avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
-    role_id: getRoleId()
+    role_id: getRoleId(),
+    shop_id: getShopId(),
   }
 }
 
@@ -28,6 +29,9 @@ const mutations = {
   },
   SET_ROLEID: (state, role_id) => {
     state.role_id = role_id
+  },
+  SET_SHOPID: (state, shop_id) => {
+    state.shop_id = shop_id
   }
 }
 
@@ -40,9 +44,11 @@ const actions = {
         commit('SET_TOKEN', data.access_token)
         commit('SET_NAME', data.user_login)
         commit('SET_ROLEID', data.role_id)
+        commit('SET_SHOPID', data.shop_id)
         setToken(data.access_token)
         setName(data.user_login)
         setRoleId(data.role_id)
+        setShopId(data.shop_id)
         resolve(data.role_id)
       }).catch(error => {
         reject(error)
@@ -57,6 +63,7 @@ const actions = {
         removeToken() // must remove  token  first
         removeName() // must remove  token  first
         removeRoleId() // must remove  token  first
+        removeShopId() // must remove  token  first
         resetRouter()
         commit('RESET_STATE')
         resolve()
@@ -72,6 +79,7 @@ const actions = {
       removeToken() // must remove  token  first
       removeName() // must remove  token  first
       removeRoleId() // must remove  token  first
+      removeShopId() // must remove  token  first
       commit('RESET_STATE')
       resolve()
     })

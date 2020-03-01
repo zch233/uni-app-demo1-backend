@@ -41,3 +41,17 @@ export function setRoleId(role_id) {
 export function removeRoleId() {
   return Cookies.remove(RoleId)
 }
+
+const ShopId = 'shop_id'
+
+export function getShopId() {
+  return Cookies.get(ShopId)
+}
+
+export function setShopId(shop_id) {
+  return Cookies.set(ShopId, shop_id)
+}
+
+export function removeShopId() {
+  return Cookies.remove(ShopId)
+}

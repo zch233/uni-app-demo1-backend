@@ -2,7 +2,6 @@ import axios from 'axios'
 import { Loading, Notification } from 'element-ui'
 import store from '@/store'
 import { getToken } from '@/utils/auth'
-import router from '@/router'
 
 // create an axios instance
 const service = axios.create({
@@ -49,7 +48,9 @@ service.interceptors.response.use(
         type: 'error'
       })
       if (res.code === 'token_error') {
-        router.push('/login')
+        store.dispatch('user/resetToken').then(() => {
+          location.reload()
+        })
         return
       }
       throw Error(res.message || 'Error')
