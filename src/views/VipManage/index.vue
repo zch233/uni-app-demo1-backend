@@ -1,28 +1,22 @@
 <template>
   <div class="app-container">
-    <el-form ref="searchForm" :model="searchForm" label-width="80px">
-      <el-row>
-        <el-col :span="6">
-          <el-form-item label="UID：" prop="uid">
-            <el-input v-model="searchForm.id" placeholder="请输入会员UID"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="6">
-          <el-form-item label="等级：" prop="type">
-            <el-select v-model.number="searchForm.type" placeholder="请选择">
-              <el-option label="全部" :value="undefined"></el-option>
-              <el-option label="普通会员" :value="1"></el-option>
-              <el-option label="黄金会员" :value="2"></el-option>
-            </el-select>
-          </el-form-item>
-        </el-col>
-        <el-col :span="6">
-          <el-form-item label="手机号：" prop="mobile">
-            <el-input v-model.number="searchForm.id" placeholder="请输入会员手机号"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="6" style="text-align:right;"><el-button type="primary" @click="initVipList">搜索</el-button><el-button @click="$refs.searchForm.resetFields()">重置</el-button></el-col>
-      </el-row>
+    <el-form ref="searchForm" :model="searchForm" :inline="true">
+      <el-form-item label="UID：" prop="uid">
+        <el-input v-model="searchForm.id" placeholder="请输入会员UID"></el-input>
+      </el-form-item>
+      <el-form-item label="等级：" prop="type">
+        <el-select v-model.number="searchForm.type" placeholder="请选择">
+          <el-option label="全部" :value="undefined"></el-option>
+          <el-option label="普通会员" :value="1"></el-option>
+          <el-option label="黄金会员" :value="2"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="手机号：" prop="mobile">
+        <el-input v-model.number="searchForm.id" placeholder="请输入会员手机号"></el-input>
+      </el-form-item>
+      <el-form-item label="">
+        <el-button type="primary" @click="initVipList">搜索</el-button><el-button @click="$refs.searchForm.resetFields()">重置</el-button>
+      </el-form-item>
     </el-form>
     <el-table
       :data="tableData"
