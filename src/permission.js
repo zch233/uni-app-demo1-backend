@@ -2,7 +2,7 @@ import router from './router'
 import store from './store'
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
-import { getToken } from '@/utils/auth' // get token from cookie
+import { getToken, getRoleId } from '@/utils/auth' // get token from cookie
 import getPageTitle from '@/utils/get-page-title'
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
@@ -29,7 +29,7 @@ router.beforeEach(async(to, from, next) => {
       if (hasRoutes) {
         next()
       } else {
-        const accessRoutes = await store.dispatch('permission/generateRoutes')
+        const accessRoutes = await store.dispatch('permission/generateRoutes', getRoleId())
         router.addRoutes(accessRoutes)
         next({ ...to, replace: true })
       }

@@ -43,7 +43,7 @@ const actions = {
         setToken(data.access_token)
         setName(data.user_login)
         setRoleId(data.role_id)
-        resolve()
+        resolve(data.role_id)
       }).catch(error => {
         reject(error)
       })

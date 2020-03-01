@@ -100,8 +100,8 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
-          this.$store.dispatch('user/login', this.loginForm).then(async () => {
-            const accessRoutes = await this.$store.dispatch('permission/generateRoutes')
+          this.$store.dispatch('user/login', this.loginForm).then(async (roles) => {
+            const accessRoutes = await this.$store.dispatch('permission/generateRoutes', roles)
             this.$router.addRoutes(accessRoutes)
             this.$router.push({ path: this.redirect || '/', query: this.otherQuery  })
             this.loading = false

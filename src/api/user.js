@@ -16,14 +16,6 @@ export function logout() {
   })
 }
 
-export function getRightList(data) {
-  return request({
-    url: '/mango/right_list',
-    method: 'post',
-    data
-  })
-}
-
 export function uploadImg(base64Data) {
   function dataURLtoBlob (dataurl) {
     var arr = dataurl.split(','),

@@ -41,7 +41,7 @@ export default {
       })
     },
     async getUserLineData () {
-      const { data } = await getUserLineData()
+      const data = await getUserLineData()
       return [ Object.keys(data), Object.values(data) ]
     }
   }

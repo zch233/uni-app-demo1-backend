@@ -8,6 +8,14 @@ export function getRoleList(data) {
   })
 }
 
+export function getRightList(data) {
+  return request({
+    url: '/mango/right_list',
+    method: 'post',
+    data
+  })
+}
+
 export function addRole(data) {
   return request({
     url: '/mango/role_add',
