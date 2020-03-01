@@ -107,7 +107,8 @@
     },
     methods: {
       async getCouponUserList () {
-        const data = await getCouponUserList({ page_size: this.pageSize, current_page: this.currentPage, id: this.currentEditData.id })
+        Object.keys(this.searchForm).map(v => (this.searchForm[v] = this.searchForm[v] / 1000))
+        const data = await getCouponUserList({ page_size: this.pageSize, current_page: this.currentPage, id: this.currentEditData.id, ...this.searchForm })
         this.tableData = data.data
         this.total = data.total_num
       },

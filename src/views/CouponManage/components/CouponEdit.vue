@@ -104,7 +104,6 @@
             return false;
           }
         });
-
       },
       resetForm() {
         this.$refs.form.resetFields();
