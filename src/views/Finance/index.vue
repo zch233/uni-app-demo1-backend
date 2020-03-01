@@ -1,36 +1,30 @@
 <template>
   <div class="app-container">
-    <el-form ref="searchForm" :model="searchForm" label-width="80px">
-      <el-row>
-        <el-col :span="11">
-          <el-form-item label="日期：" prop="status">
-            <el-date-picker
-              v-model.number="searchForm.start_time"
-              value-format="timestamp"
-              type="date"
-              placeholder="开始日期">
-            </el-date-picker>
-            至
-            <el-date-picker
-              v-model.number="searchForm.end_time"
-              value-format="timestamp"
-              type="date"
-              placeholder="结束日期">
-            </el-date-picker>
-          </el-form-item>
-        </el-col>
-        <el-col :span="6">
-          <el-form-item label="订单号：" prop="order_id">
-            <el-input v-model="searchForm.order_id" placeholder="请输入订单号"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="6">
-          <el-form-item label="充值号：" prop="out_trade_no">
-            <el-input v-model="searchForm.out_trade_no" placeholder="请输入充值号"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="6" style="text-align:right;"><el-button type="primary" @click="initFinanceList">搜索</el-button><el-button @click="$refs.searchForm.resetFields()">重置</el-button></el-col>
-      </el-row>
+    <el-form ref="searchForm" :model="searchForm" :inline="true">
+      <el-form-item label="日期：" prop="status">
+        <el-date-picker
+          v-model.number="searchForm.start_time"
+          value-format="timestamp"
+          type="date"
+          placeholder="开始日期">
+        </el-date-picker>
+        至
+        <el-date-picker
+          v-model.number="searchForm.end_time"
+          value-format="timestamp"
+          type="date"
+          placeholder="结束日期">
+        </el-date-picker>
+      </el-form-item>
+      <el-form-item label="订单号：" prop="order_id">
+        <el-input v-model="searchForm.order_id" placeholder="请输入订单号"></el-input>
+      </el-form-item>
+      <el-form-item label="充值号：" prop="out_trade_no">
+        <el-input v-model="searchForm.out_trade_no" placeholder="请输入充值号"></el-input>
+      </el-form-item>
+      <el-form-item label="">
+        <el-button type="primary" @click="initFinanceList">搜索</el-button><el-button @click="$refs.searchForm.resetFields()">重置</el-button>
+      </el-form-item>
     </el-form>
     <el-table
       :data="tableData"
