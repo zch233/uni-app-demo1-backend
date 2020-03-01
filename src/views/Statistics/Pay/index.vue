@@ -72,6 +72,7 @@
     },
     methods: {
       async getPayList () {
+        Object.keys(this.searchForm).map(v => (this.searchForm[v] = this.searchForm[v] / 1000))
         const data = await getPayList({ page_size: this.pageSize, current_page: this.currentPage, ...this.searchForm })
         this.tableData = [data]
         this.total = data.total_num
