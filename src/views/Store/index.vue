@@ -1,49 +1,48 @@
 <template>
   <div class="app-container">
     <el-row style="margin-bottom:20px;">
-      <el-col :span="24">
-        <el-button @click="showProductEditForm({new:1})" type="success">新增门店</el-button>
+      <el-col :span="12">
+        <el-avatar shape="square" size="large" src="squareUrl"></el-avatar>
+        <el-tag>运营中</el-tag>
+        <el-button type="primary" icon="el-icon-s-tools" circle></el-button>
+      </el-col>
+      <el-col :span="12" style="text-align:right;">
+        <el-input placeholder="请输入运单号" v-model="input2">
+          <template slot="append">签收</template>
+        </el-input>
       </el-col>
     </el-row>
-    <el-form ref="searchForm" :model="searchForm" label-width="80px">
-      <el-col :span="11">
-          <el-form-item label="日期：" prop="status">
-            <el-date-picker
-              v-model.number="searchForm.start_time"
-              value-format="timestamp"
-              type="date"
-              placeholder="开始日期">
-            </el-date-picker>
-            至
-            <el-date-picker
-              v-model.number="searchForm.end_time"
-              value-format="timestamp"
-              type="date"
-              placeholder="结束日期">
-            </el-date-picker>
-          </el-form-item>
-        </el-col>
-        <el-col :span="6">
-          <el-form-item label="状态：" prop="status">
-            <el-select v-model.number="searchForm.status" placeholder="请选择">
-              <el-option label="全部" :value="undefined"></el-option>
-              <el-option v-for="(item, index) in status" :key="item" :label="item" :value="index"></el-option>
-            </el-select>
-          </el-form-item>
-        </el-col>
-      <el-row>
-        <el-col :span="6">
-          <el-form-item label="运单号：" prop="mail_id">
-            <el-input v-model="searchForm.mail_id" placeholder="请输入运单号"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="6">
-          <el-form-item label="订单号：" prop="order_id">
-            <el-input v-model="searchForm.order_id" placeholder="请输入订单号"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="6" style="text-align:right;"><el-button type="primary" @click="initProductList">搜索</el-button><el-button @click="$refs.searchForm.resetFields()">重置</el-button></el-col>
-      </el-row>
+    <el-form ref="searchForm" :inline="true" :model="searchForm">
+      <el-form-item label="日期：" prop="status">
+        <el-date-picker
+          v-model.number="searchForm.start_time"
+          value-format="timestamp"
+          type="date"
+          placeholder="开始日期">
+        </el-date-picker>
+        至
+        <el-date-picker
+          v-model.number="searchForm.end_time"
+          value-format="timestamp"
+          type="date"
+          placeholder="结束日期">
+        </el-date-picker>
+      </el-form-item>
+      <el-form-item label="状态：" prop="status">
+        <el-select v-model.number="searchForm.status" placeholder="请选择">
+          <el-option label="全部" :value="undefined"></el-option>
+          <el-option v-for="(item, index) in status" :key="item" :label="item" :value="index"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="运单号：" prop="mail_id">
+        <el-input v-model="searchForm.mail_id" placeholder="请输入运单号"></el-input>
+      </el-form-item>
+      <el-form-item label="订单号：" prop="order_id">
+        <el-input v-model="searchForm.order_id" placeholder="请输入订单号"></el-input>
+      </el-form-item>
+      <el-form-item label="">
+        <el-button type="primary" @click="initProductList">搜索</el-button><el-button @click="$refs.searchForm.resetFields()">重置</el-button>
+      </el-form-item>
     </el-form>
     <el-table
       :data="tableData"
