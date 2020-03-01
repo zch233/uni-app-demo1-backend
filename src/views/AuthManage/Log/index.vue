@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <el-form ref="searchForm" :model="searchForm" label-width="100px">
+    <el-form ref="searchForm" :model="searchForm" :inline="true">
       <el-form-item label="管理员名称：" prop="name">
         <el-input v-model="searchForm.name" placeholder="请输入管理员名称"></el-input>
       </el-form-item>

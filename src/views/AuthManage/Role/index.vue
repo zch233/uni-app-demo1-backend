@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <el-form ref="searchForm" :model="searchForm" label-width="80px">
+    <el-form ref="searchForm" :model="searchForm" :inline="true">
       <el-form-item label="状态：" prop="status">
         <el-select v-model.number="searchForm.status" placeholder="请选择">
           <el-option label="全部" :value="undefined"></el-option>
