@@ -1,14 +1,12 @@
 <template>
   <div class="app-container">
-    <el-form ref="searchForm" :model="searchForm" label-width="100px">
-      <el-row>
-        <el-col :span="6">
-          <el-form-item label="优惠券码：" prop="coupon_code">
-            <el-input v-model.number="searchForm.coupon_code" placeholder="请输入优惠券码"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="6" style="text-align:right;"><el-button type="primary" @click="initProductList">搜索</el-button><el-button @click="$refs.searchForm.resetFields()">重置</el-button></el-col>
-      </el-row>
+    <el-form ref="searchForm" :model="searchForm" :inline="true">
+      <el-form-item label="优惠券码：" prop="coupon_code">
+        <el-input v-model.number="searchForm.coupon_code" placeholder="请输入优惠券码"></el-input>
+      </el-form-item>
+      <el-form-item label="">
+        <el-button type="primary" @click="initProductList">搜索</el-button><el-button @click="$refs.searchForm.resetFields()">重置</el-button>
+      </el-form-item>
     </el-form>
     <el-row style="margin-bottom:20px;">
       <el-col :span="12">
