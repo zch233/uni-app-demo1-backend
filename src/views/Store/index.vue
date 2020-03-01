@@ -154,6 +154,7 @@
     },
     methods: {
       async getStoreOrderList () {
+        Object.keys(this.searchForm).map(v => (this.searchForm[v] = this.searchForm[v] / 1000))
         const data = await getStoreOrderList({ page_size: this.pageSize, current_page: this.currentPage, ...this.searchForm })
         this.tableData = data.data
         this.total = data.total_num
