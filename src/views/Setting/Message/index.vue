@@ -1,23 +1,19 @@
 <template>
   <div class="app-container">
-    <el-form ref="searchForm" :model="searchForm" label-width="80px">
-      <el-row>
-        <el-col :span="6">
-          <el-form-item label="状态：" prop="status">
-            <el-select v-model.number="searchForm.status" placeholder="请选择">
-              <el-option label="全部" :value="undefined"></el-option>
-              <el-option label="上架中" :value="1"></el-option>
-              <el-option label="下架中" :value="2"></el-option>
-            </el-select>
-          </el-form-item>
-        </el-col>
-        <el-col :span="6">
-          <el-form-item label="ID：" prop="id">
-            <el-input v-model.number="searchForm.id" placeholder="请输入商品ID"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="6" style="text-align:right;"><el-button type="primary" @click="initProductList">搜索</el-button><el-button @click="$refs.searchForm.resetFields()">重置</el-button></el-col>
-      </el-row>
+    <el-form ref="searchForm" :model="searchForm" :inline="true">
+      <el-form-item label="状态：" prop="status">
+        <el-select v-model.number="searchForm.status" placeholder="请选择">
+          <el-option label="全部" :value="undefined"></el-option>
+          <el-option label="上架中" :value="1"></el-option>
+          <el-option label="下架中" :value="2"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="ID：" prop="id">
+        <el-input v-model.number="searchForm.id" placeholder="请输入商品ID"></el-input>
+      </el-form-item>
+      <el-form-item label="">
+        <el-button type="primary" @click="initProductList">搜索</el-button><el-button @click="$refs.searchForm.resetFields()">重置</el-button>
+      </el-form-item>
     </el-form>
     <el-row style="margin-bottom:20px;">
       <el-col :span="24">
