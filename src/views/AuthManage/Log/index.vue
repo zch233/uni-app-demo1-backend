@@ -1,14 +1,12 @@
 <template>
   <div class="app-container">
     <el-form ref="searchForm" :model="searchForm" label-width="100px">
-      <el-row>
-        <el-col :span="6">
-          <el-form-item label="管理员名称：" prop="name">
-            <el-input v-model="searchForm.name" placeholder="请输入管理员名称"></el-input>
-          </el-form-item>
-        </el-col>
-        <el-col :span="6" style="text-align:right;"><el-button type="primary" @click="initLogList">搜索</el-button><el-button @click="$refs.searchForm.resetFields()">重置</el-button></el-col>
-      </el-row>
+      <el-form-item label="管理员名称：" prop="name">
+        <el-input v-model="searchForm.name" placeholder="请输入管理员名称"></el-input>
+      </el-form-item>
+      <el-form-item label="">
+        <el-button type="primary" @click="initLogList">搜索</el-button><el-button @click="$refs.searchForm.resetFields()">重置</el-button>
+      </el-form-item>
     </el-form>
     <el-table
       :data="tableData"
