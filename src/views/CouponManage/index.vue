@@ -149,6 +149,7 @@
     },
     methods: {
       async getCouponList () {
+        Object.keys(this.searchForm).map(v => (this.searchForm[v] = this.searchForm[v] / 1000))
         const data = await getCouponList({ page_size: this.pageSize, current_page: this.currentPage, type: this.$route.meta.type, ...this.searchForm })
         this.tableData = data.data.map(v => (v.coupon_start = v.coupon_start * 1000) && ((v.coupon_end = v.coupon_end * 1000)) && v)
         this.total = data.total_num
