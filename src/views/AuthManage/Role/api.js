@@ -1,13 +1,5 @@
 import request from '@/utils/request'
 
-export function getRightList(data) {
-  return request({
-    url: '/mango/right_list',
-    method: 'post',
-    data
-  })
-}
-
 export function getRoleList(data) {
   return request({
     url: '/mango/role_list',

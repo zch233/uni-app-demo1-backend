@@ -33,7 +33,8 @@
 </template>
 
 <script>
-  import { editRole, addRole, getRightList } from '../api.js'
+  import { editRole, addRole } from '../api.js'
+  import { getRightList } from '@/api/user'
 
   export default {
     name: 'RoleEdit',
