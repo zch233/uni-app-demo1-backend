@@ -155,7 +155,7 @@
         console.log(this.searchForm)
         const id = this.$route.query.id
         if (id) {
-          const { data } = await this.getOrderList({ id })
+          const { data } = await getOrderList({ id })
           this.showOrderDetail(data[0])
         }
         this.getOrderList()
