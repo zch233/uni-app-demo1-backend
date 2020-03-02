@@ -3,14 +3,14 @@
     <el-form ref="searchForm" :model="searchForm" :inline="true">
       <el-form-item label="日期：" prop="status">
         <el-date-picker
-          v-model.number="searchForm.start_time"
+          v-model.number="searchForm.start_time_js"
           value-format="timestamp"
           type="date"
           placeholder="开始日期">
         </el-date-picker>
         至
         <el-date-picker
-          v-model.number="searchForm.end_time"
+          v-model.number="searchForm.end_time_js"
           value-format="timestamp"
           type="date"
           placeholder="结束日期">
@@ -146,12 +146,23 @@
       }
     },
     created () {
-      this.getOrderList()
+      this.initPage()
     },
     methods: {
-      async getOrderList () {
-        Object.keys(this.searchForm).map(v => (this.searchForm[v] = this.searchForm[v] / 1000))
-        const data = await getOrderList({ page_size: this.pageSize, current_page: this.currentPage, ...this.searchForm })
+      async initPage () {
+        const user_id = this.$route.query.user_id
+        this.searchForm.user_id = user_id
+        console.log(this.searchForm)
+        const id = this.$route.query.id
+        if (id) {
+          const { data } = await this.getOrderList({ id })
+          this.showOrderDetail(data[0])
+        }
+        this.getOrderList()
+      },
+      async getOrderList (other = {}) {
+        ['start_time_js', 'end_time_js'].map(v => this.searchForm[v] && (this.searchForm[v.slice(0, -3)] = this.searchForm[v] / 1000))
+        const data = await getOrderList({ page_size: this.pageSize, current_page: this.currentPage, ...this.searchForm, ...other })
         this.tableData = data.data
         this.total = data.total_num
       },

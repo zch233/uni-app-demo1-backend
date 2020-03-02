@@ -16,14 +16,14 @@
     <el-form ref="searchForm" :inline="true" :model="searchForm">
       <el-form-item label="日期：" prop="status">
         <el-date-picker
-          v-model.number="searchForm.start_time"
+          v-model.number="searchForm.start_time_js"
           value-format="timestamp"
           type="date"
           placeholder="开始日期">
         </el-date-picker>
         至
         <el-date-picker
-          v-model.number="searchForm.end_time"
+          v-model.number="searchForm.end_time_js"
           value-format="timestamp"
           type="date"
           placeholder="结束日期">
@@ -101,7 +101,7 @@
         width="150">
         <template slot-scope="scope">
           <el-button :disabled="scope.row.status !== 4" size="mini" type="success" @click="sendOrder(scope.row)">发货</el-button>
-          <el-button size="mini" type="primary">详情</el-button>
+          <el-button size="mini" type="primary" @click="viewOrderDetail(scope.row)">详情</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -154,7 +154,7 @@
     },
     methods: {
       async getStoreOrderList () {
-        Object.keys(this.searchForm).map(v => (this.searchForm[v] = this.searchForm[v] / 1000))
+        ['start_time_js', 'end_time_js'].map(v => this.searchForm[v] && (this.searchForm[v.slice(0, -3)] = this.searchForm[v] / 1000))
         const data = await getStoreOrderList({ page_size: this.pageSize, current_page: this.currentPage, ...this.searchForm })
         this.tableData = data.data
         this.total = data.total_num
@@ -172,6 +172,12 @@
         await signOrder({ mail_no: this.mail_no })
         this.$message({ message: '签收成功！', type: 'success' })
         this.initStoreOrderList()
+      },
+      viewOrderDetail ({ id }) {
+        this.$router.push({
+          path: '/order-manage/index',
+          query: { id },
+        })
       },
       sendOrder ({ order_id }) {
         this.$confirm('点击确认将发货并自动生成运单号, 是否继续?', '提示', {

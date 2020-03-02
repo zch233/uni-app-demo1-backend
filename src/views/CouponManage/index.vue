@@ -3,14 +3,14 @@
     <el-form ref="searchForm" :model="searchForm" :inline="true">
       <el-form-item label="日期：" prop="status">
         <el-date-picker
-          v-model.number="searchForm.start_time"
+          v-model.number="searchForm.start_time_js"
           value-format="timestamp"
           type="date"
           placeholder="开始日期">
         </el-date-picker>
         至
         <el-date-picker
-          v-model.number="searchForm.end_time"
+          v-model.number="searchForm.end_time_js"
           value-format="timestamp"
           type="date"
           placeholder="结束日期">
@@ -149,7 +149,7 @@
     },
     methods: {
       async getCouponList () {
-        Object.keys(this.searchForm).map(v => (this.searchForm[v] = this.searchForm[v] / 1000))
+        ['start_time_js', 'end_time_js'].map(v => this.searchForm[v] && (this.searchForm[v.slice(0, -3)] = this.searchForm[v] / 1000))
         const data = await getCouponList({ page_size: this.pageSize, current_page: this.currentPage, type: this.$route.meta.type, ...this.searchForm })
         this.tableData = data.data.map(v => (v.coupon_start = v.coupon_start * 1000) && ((v.coupon_end = v.coupon_end * 1000)) && v)
         this.total = data.total_num

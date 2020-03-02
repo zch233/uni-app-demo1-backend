@@ -69,7 +69,7 @@
         width="200">
         <template slot-scope="scope">
           <el-button @click="showVipDetail(scope.row)" size="mini" type="primary">会员详情</el-button>
-          <el-button @click="showVipDetail(scope.row)" size="mini" type="success">订单详情</el-button>
+          <el-button @click="viewVipOrderList(scope.row)" size="mini" type="success">订单详情</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -121,6 +121,12 @@
       showVipDetail (data) {
         this.vipDetailVisible = true
         this.currentEditData = data
+      },
+      viewVipOrderList ({ uid }) {
+        this.$router.push({
+          path: '/order-manage/index',
+          query: { user_id: uid },
+        })
       },
       initVipList () {
         this.currentPage = 1

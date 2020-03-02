@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="会员详情" @closed="resetForm" width="800px" :visible.sync="formVisible" :close-on-click-modal="false" :show-close="false">
+  <el-dialog title="会员详情" @closed="resetForm" width="1000px" :visible.sync="formVisible" :close-on-click-modal="false" :before-close="() => $emit('cancel')">
     <el-tabs type="border-card">
       <el-tab-pane label="基本信息">
         <el-form ref="form" :model="form" label-width="80px">
@@ -53,9 +53,6 @@
       </el-tab-pane>
       <el-tab-pane label="交易信息"><user-count :user-data="currentEditData"></user-count></el-tab-pane>
     </el-tabs>
-    <div slot="footer" class="dialog-footer">
-      <el-button @click="$emit('cancel')">取 消</el-button>
-    </div>
   </el-dialog>
 </template>
 
