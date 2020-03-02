@@ -5,13 +5,13 @@
         <el-col :span="12">
           <el-form-item label="LOGO设置" prop="logo">
             <img width="150" style="vertical-align:center;" v-show="imageForm.logo" :src="imageForm.logo">
-            <el-button :disabled="imageFormDisabled" type="primary" @click="currentImage='logo',myUploadVisible=true">上传<i class="el-icon-upload el-icon--right"></i></el-button>
+            <el-button :disabled="imageFormDisabled" type="primary" @click="showSmallUploader('logo')">上传<i class="el-icon-upload el-icon--right"></i></el-button>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="加载图标" prop="icon">
             <img width="150" style="vertical-align:center;" v-show="imageForm.icon" :src="imageForm.icon">
-            <el-button :disabled="imageFormDisabled" type="primary" @click="currentImage='icon',myUploadVisible=true">上传<i class="el-icon-upload el-icon--right"></i></el-button>
+            <el-button :disabled="imageFormDisabled" type="primary" @click="showSmallUploader('icon')">上传<i class="el-icon-upload el-icon--right"></i></el-button>
           </el-form-item>
         </el-col>
       </el-row>
@@ -19,7 +19,7 @@
         <el-col :span="12">
           <el-form-item label="海报轮播1" prop="image1">
             <img width="150" style="vertical-align:center;" v-show="imageForm.image1" :src="imageForm.image1">
-            <el-button :disabled="imageFormDisabled" type="primary" @click="currentImage='image1',myUploadVisible=true">上传<i class="el-icon-upload el-icon--right"></i></el-button>
+            <el-button :disabled="imageFormDisabled" type="primary" @click="showBigUploader('image1')">上传<i class="el-icon-upload el-icon--right"></i></el-button>
           </el-form-item>
         </el-col>
         <el-col :span="12">
@@ -32,7 +32,7 @@
         <el-col :span="12">
           <el-form-item label="海报轮播2" prop="image2">
             <img width="150" style="vertical-align:center;" v-show="imageForm.image2" :src="imageForm.image2">
-            <el-button :disabled="imageFormDisabled" type="primary" @click="currentImage='image2',myUploadVisible=true">上传<i class="el-icon-upload el-icon--right"></i></el-button>
+            <el-button :disabled="imageFormDisabled" type="primary" @click="showBigUploader('image2')">上传<i class="el-icon-upload el-icon--right"></i></el-button>
           </el-form-item>
         </el-col>
         <el-col :span="12">
@@ -45,7 +45,7 @@
         <el-col :span="12">
           <el-form-item label="海报轮播3" prop="image3">
             <img width="150" style="vertical-align:center;" v-show="imageForm.image3" :src="imageForm.image3">
-            <el-button :disabled="imageFormDisabled" type="primary" @click="currentImage='image3',myUploadVisible=true">上传<i class="el-icon-upload el-icon--right"></i></el-button>
+            <el-button :disabled="imageFormDisabled" type="primary" @click="showBigUploader('image3')">上传<i class="el-icon-upload el-icon--right"></i></el-button>
           </el-form-item>
         </el-col>
         <el-col :span="12">
@@ -101,8 +101,8 @@
       @crop-success="cropSuccess"
       v-model="myUploadVisible"
       :key="myUploadKey"
-      :width="100"
-      :height="100"
+      :width="cropShapeWidth"
+      :height="cropShapeHeight"
       img-format="png">
     </my-upload>
   </div>
@@ -123,6 +123,8 @@
         myUploadKey: 0,
         imageFormDisabled: true,
         configFormDisabled: true,
+        cropShapeWidth: 100,
+        cropShapeHeight: 100,
         imageForm: {},
         imageArr: ['logo', 'icon', 'image1', 'image2', 'image3'],
         configForm: { shop_coupon: {}, wash_coupon: {}, bind_phone: {} },
@@ -183,6 +185,21 @@
         this.imageForm[this.currentImage] = imageDataUrl
         this.myUploadVisible = false
         this.myUploadKey += 1
+      },
+      showUploader (image) {
+        this.currentImage = image
+        this.myUploadKey += 1
+        this.myUploadVisible = true
+      },
+      showSmallUploader (image) {
+        this.cropShapeWidth = 100
+        this.cropShapeHeight = 100
+        this.showUploader(image)
+      },
+      showBigUploader (image) {
+        this.cropShapeWidth = 750
+        this.cropShapeHeight = 350
+        this.showUploader(image)
       },
     }
   }
