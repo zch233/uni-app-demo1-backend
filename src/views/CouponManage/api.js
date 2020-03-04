@@ -39,3 +39,11 @@ export function deleteCoupon(data) {
     data
   })
 }
+
+export function issueCoupon(data) {
+  return request({
+    url: '/mango/coupon_user_grant',
+    method: 'post',
+    data
+  })
+}

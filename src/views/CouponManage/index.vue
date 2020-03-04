@@ -86,10 +86,11 @@
       <el-table-column
         fixed="right"
         label="操作"
-        width="220">
+        width="290">
         <template slot-scope="scope">
           <el-button @click="showCouponUserDetail(scope.row)" size="mini" type="success">领取详情</el-button>
           <el-button @click="showCouponEditForm(scope.row)" size="mini" type="primary">编辑</el-button>
+          <el-button @click="issueCoupon(scope.row)" size="mini" type="warning">发放</el-button>
           <el-popconfirm title="确认要删除吗？" @onConfirm="deleteCoupon(scope.row, scope.$index)">
             <el-button size="mini" type="danger" icon="el-icon-delete" slot="reference"></el-button>
           </el-popconfirm>
@@ -120,7 +121,7 @@
 </template>
 
 <script>
-  import { getCouponList, deleteCoupon, editCoupon } from './api.js'
+  import { getCouponList, deleteCoupon, editCoupon, issueCoupon } from './api.js'
   import CouponEdit from './components/CouponEdit'
   import CouponUserDetail from './components/CouponUserDetail'
 
@@ -162,6 +163,10 @@
       async changeCouponStatus (status, { id }) {
         await editCoupon({ id, status })
         this.$message({ message: '修改成功！', type: 'success' })
+      },
+      async issueCoupon ({ id }) {
+        await issueCoupon({ coupon_id: id })
+        this.$message({ message: '发放优惠券成功！', type: 'success' })
       },
       showCouponEditForm (data) {
         this.couponEditFormVisible = true
