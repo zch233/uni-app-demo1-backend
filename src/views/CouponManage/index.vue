@@ -150,7 +150,7 @@
     methods: {
       async getCouponList () {
         ['start_time_js', 'end_time_js'].map(v => this.searchForm[v] && (this.searchForm[v.slice(0, -3)] = this.searchForm[v] / 1000))
-        const data = await getCouponList({ page_size: this.pageSize, current_page: this.currentPage, type: this.$route.meta.type, ...this.searchForm })
+        const data = await getCouponList({ page_size: this.pageSize, page: this.currentPage, type: this.$route.meta.type, ...this.searchForm })
         this.tableData = data.data.map(v => (v.coupon_start = v.coupon_start * 1000) && ((v.coupon_end = v.coupon_end * 1000)) && v)
         this.total = data.total_num
       },

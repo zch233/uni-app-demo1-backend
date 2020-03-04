@@ -111,7 +111,7 @@
     methods: {
       async getFinanceList () {
         ['start_time_js', 'end_time_js'].map(v => this.searchForm[v] && (this.searchForm[v.slice(0, -3)] = this.searchForm[v] / 1000))
-        const data = await getFinanceList({ page_size: this.pageSize, current_page: this.currentPage, ...this.searchForm })
+        const data = await getFinanceList({ page_size: this.pageSize, page: this.currentPage, ...this.searchForm })
         this.tableData = data.data
         this.total = data.total_num
       },

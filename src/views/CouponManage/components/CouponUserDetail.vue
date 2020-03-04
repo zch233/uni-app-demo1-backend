@@ -108,7 +108,7 @@
     methods: {
       async getCouponUserList () {
         ['start_time_js', 'end_time_js'].map(v => this.searchForm[v] && (this.searchForm[v.slice(0, -3)] = this.searchForm[v] / 1000))
-        const data = await getCouponUserList({ page_size: this.pageSize, current_page: this.currentPage, id: this.currentEditData.id, ...this.searchForm })
+        const data = await getCouponUserList({ page_size: this.pageSize, page: this.currentPage, id: this.currentEditData.id, ...this.searchForm })
         this.tableData = data.data
         this.total = data.total_num
       },

@@ -124,7 +124,7 @@
     },
     methods: {
       async getAdminList () {
-        const data = await getAdminList({ page_size: this.pageSize, current_page: this.currentPage, ...this.searchForm })
+        const data = await getAdminList({ page_size: this.pageSize, page: this.currentPage, ...this.searchForm })
         await this.getRoleList()
         this.tableData = data.data.map(v => (v.role_name = this.roleList.map(v2 => v.role_id === v2.id && v2.name).filter(Boolean).join()) && v)
       },

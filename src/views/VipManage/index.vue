@@ -114,7 +114,7 @@
     },
     methods: {
       async getVipList () {
-        const data = await getVipList({ page_size: this.pageSize, current_page: this.currentPage, ...this.searchForm })
+        const data = await getVipList({ page_size: this.pageSize, page: this.currentPage, ...this.searchForm })
         this.tableData = data.data
         this.total = data.total_num
       },

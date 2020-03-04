@@ -116,7 +116,7 @@
     },
     methods: {
       async getStoreList () {
-        const data = await getStoreList({ page_size: this.pageSize, current_page: this.currentPage, ...this.searchForm })
+        const data = await getStoreList({ page_size: this.pageSize, page: this.currentPage, ...this.searchForm })
         this.tableData = data.data.map(v => (v.image = process.env.VUE_APP_IMG_API + v.image) && v)
         this.total = data.total_num
       },
