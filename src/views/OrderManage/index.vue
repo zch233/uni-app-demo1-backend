@@ -151,13 +151,7 @@
     methods: {
       async initPage () {
         const user_id = this.$route.query.user_id
-        this.searchForm.user_id = user_id
-        console.log(this.searchForm)
-        const id = this.$route.query.id
-        if (id) {
-          const { data } = await getOrderList({ id })
-          this.showOrderDetail(data[0])
-        }
+        this.$set(this.searchForm, 'user_id', user_id)
         this.getOrderList()
       },
       async getOrderList (other = {}) {

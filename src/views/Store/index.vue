@@ -120,6 +120,12 @@
       @cancel="storeEditFormVisible=false"
       @confirm="storeEditFormVisible=false, getStoreInfo()"
     ></store-edit>
+    <order-detail
+      :form-visible="orderDetailVisible"
+      :current-edit-data="currentEditData"
+      :props-status="status"
+      @cancel="orderDetailVisible=false"
+    ></order-detail>
   </div>
 </template>
 
@@ -127,17 +133,21 @@
   import { getStoreOrderList, signOrder, sendOrder } from './api.js'
   import { getStoreList } from '../StoreManage/api.js'
   import StoreEdit from '../StoreManage/components/StoreEdit'
+  import OrderDetail from '../OrderManage/components/OrderDetail'
+  import { getOrderList } from '../OrderManage/api.js'
   import { mapGetters } from 'vuex'
 
   export default {
     name: 'Store',
-    components: { StoreEdit },
+    components: { StoreEdit, OrderDetail },
     computed: {
       ...mapGetters(['shop_id'])
     },
     data() {
       return {
         storeEditFormVisible: false,
+        orderDetailVisible: false,
+        currentEditData: {},
         storeInfo: {},
         searchForm: {},
         mail_no: '',
@@ -173,11 +183,10 @@
         this.$message({ message: '签收成功！', type: 'success' })
         this.initStoreOrderList()
       },
-      viewOrderDetail ({ id }) {
-        this.$router.push({
-          path: '/order-manage/index',
-          query: { id },
-        })
+      async viewOrderDetail ({ id }) {
+        const { data } = await getOrderList({ id })
+        this.orderDetailVisible = true
+        this.currentEditData = data[0]
       },
       sendOrder ({ order_id }) {
         this.$confirm('点击确认将发货并自动生成运单号, 是否继续?', '提示', {
