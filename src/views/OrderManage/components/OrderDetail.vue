@@ -48,6 +48,7 @@
               <div>订单备注：{{ currentEditData.in_remark || '无' }}</div>
             </el-col>
             <el-col :span="8">
+              <div>总价：{{ currentEditData.total_price }}</div>
               <div>商品小计：{{ currentEditData.goods_detail && currentEditData.goods_detail.map(v => (v.price * v.buy_number).toFixed(2) * 1).reduce((a, b) => a + b, 0) }}</div>
               <div v-if="currentEditData.coupon_price">优惠券：{{ currentEditData.coupon_price }}</div>
               <div>运费：0</div>
@@ -144,7 +145,7 @@
         this.$refs.orderForm.validate(async (valid) => {
           if (valid) {
             const orderFormData = this.orderForm
-            const newAddressData = (orderFormData.addressData && Object.keys(orderFormData.addressData) > 0) ? { province: CodeToText[orderFormData.addressData[0]], city: CodeToText[orderFormData.addressData[1]], district: CodeToText[orderFormData.addressData[2]] } : {}
+            const newAddressData = (orderFormData.addressData && orderFormData.addressData.length > 0) ? { province: CodeToText[orderFormData.addressData[0]], city: CodeToText[orderFormData.addressData[1]], district: CodeToText[orderFormData.addressData[2]] } : {}
             const newAddressInfo = orderFormData.addressInfo ? { address: orderFormData.addressInfo } : {}
             const data = Object.assign({ id: orderFormData.id, nickname: this.orderForm.nickname, mobile: this.orderForm.mobile }, newAddressData, newAddressInfo)
             await editOrder(data)
@@ -174,12 +175,12 @@
         this.$prompt('请输入价格', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
-          inputValue: this.currentEditData.real_price,
+          inputValue: this.currentEditData.total_price,
           inputPattern: /^([1-9]\d{0,9}|0)([.]?|(\.\d{1,2})?)$/,
           inputErrorMessage: '价格格式不正确'
         }).then(async ({ value }) => {
           await editOrder({ id: this.currentEditData.id, total_price: value })
-          this.currentEditData.real_price = value
+          this.currentEditData.total_price = value
           this.$message({
             type: 'success',
             message: '改价成功'
