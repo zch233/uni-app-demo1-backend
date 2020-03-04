@@ -51,7 +51,7 @@
               <div>商品小计：{{ currentEditData.goods_detail && currentEditData.goods_detail.map(v => (v.price * v.buy_number).toFixed(2) * 1).reduce((a, b) => a + b, 0) }}</div>
               <div v-if="currentEditData.coupon_price">优惠券：{{ currentEditData.coupon_price }}</div>
               <div>运费：0</div>
-              <div>合计：{{ currentEditData.total_price }}</div>
+              <div>合计：{{ currentEditData.real_price }}</div>
             </el-col>
           </el-row>
         </el-card>
@@ -174,12 +174,12 @@
         this.$prompt('请输入价格', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
-          inputValue: this.currentEditData.total_price,
+          inputValue: this.currentEditData.real_price,
           inputPattern: /^([1-9]\d{0,9}|0)([.]?|(\.\d{1,2})?)$/,
           inputErrorMessage: '价格格式不正确'
         }).then(async ({ value }) => {
           await editOrder({ id: this.currentEditData.id, total_price: value })
-          this.currentEditData.total_price = value
+          this.currentEditData.real_price = value
           this.$message({
             type: 'success',
             message: '改价成功'

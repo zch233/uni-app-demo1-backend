@@ -78,7 +78,7 @@
         label="下单时间">
       </el-table-column>
       <el-table-column
-        prop="total_price"
+        prop="real_price"
         label="合计">
       </el-table-column>
       <el-table-column
