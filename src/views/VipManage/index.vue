@@ -12,7 +12,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="手机号：" prop="mobile">
-        <el-input v-model.number="searchForm.id" placeholder="请输入会员手机号"></el-input>
+        <el-input v-model.number="searchForm.mobile" placeholder="请输入会员手机号"></el-input>
       </el-form-item>
       <el-form-item label="">
         <el-button type="primary" @click="initVipList">搜索</el-button><el-button @click="$refs.searchForm.resetFields()">重置</el-button>
