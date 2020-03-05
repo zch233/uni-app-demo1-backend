@@ -1,27 +1,25 @@
 <template>
   <el-dialog title="领取详情" @closed="resetForm" width="900px" :visible.sync="formVisible" :close-on-click-modal="false" :before-close="() => $emit('cancel')">
-    <el-form ref="searchForm" :model="searchForm" label-width="80px">
-      <el-row>
-        <el-col :span="16">
-          <el-form-item label="日期：" prop="start_time_js">
-            <el-date-picker
-              v-model.number="searchForm.start_time_js"
-              value-format="timestamp"
-              type="date"
-              placeholder="开始日期">
-            </el-date-picker>
-          </el-form-item>
-          <el-form-item label="至" prop="end_time_js">
-            <el-date-picker
-              v-model.number="searchForm.end_time_js"
-              value-format="timestamp"
-              type="date"
-              placeholder="结束日期">
-            </el-date-picker>
-          </el-form-item>
-        </el-col>
-        <el-col :span="5" style="text-align:right;"><el-button type="primary" @click="initCouponUserList">搜索</el-button><el-button @click="$refs.searchForm.resetFields()">重置</el-button></el-col>
-      </el-row>
+    <el-form ref="searchForm" :model="searchForm" :inline="true">
+      <el-form-item label="日期：" prop="start_time_js">
+        <el-date-picker
+          v-model.number="searchForm.start_time_js"
+          value-format="timestamp"
+          type="date"
+          placeholder="开始日期">
+        </el-date-picker>
+      </el-form-item>
+      <el-form-item label="至" prop="end_time_js">
+        <el-date-picker
+          v-model.number="searchForm.end_time_js"
+          value-format="timestamp"
+          type="date"
+          placeholder="结束日期">
+        </el-date-picker>
+      </el-form-item>
+      <el-form-item label="">
+        <el-button type="primary" @click="initCouponUserList">搜索</el-button><el-button @click="$refs.searchForm.resetFields()">重置</el-button>
+      </el-form-item>
     </el-form>
     <el-table
       :data="tableData"
@@ -60,14 +58,14 @@
         label="注册时间">
       </el-table-column>
       <el-table-column
-        fixed="used"
+        prop="used"
         label="使用">
         <template slot-scope="scope">
           {{ scope.row.status === 3 ? '已使用' : '未使用' }}
         </template>
       </el-table-column>
       <el-table-column
-        fixed="get"
+        prop="get"
         label="领取">
         <template slot-scope="scope">
           {{ scope.row.status === 1 ? '未领取' : '已领取' }}
