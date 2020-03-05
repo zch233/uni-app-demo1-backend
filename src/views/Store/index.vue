@@ -161,7 +161,7 @@
     },
     created () {
       this.getStoreOrderList()
-      this.getStoreInfo(this.shop_id)
+      this.getStoreInfo()
     },
     methods: {
       async getStoreOrderList () {
@@ -170,10 +170,10 @@
         this.tableData = data.data
         this.total = data.total_num
       },
-      async getStoreInfo (id) {
-        const data = await getStoreList({ id })
+      async getStoreInfo () {
+        const data = await getStoreList({ id: this.shop_id })
+        data.data[0].image = process.env.VUE_APP_IMG_API + data.data[0].image
         this.storeInfo = data.data[0]
-        this.storeInfo.image = process.env.VUE_APP_IMG_API + this.storeInfo.image
       },
       async signOrder () {
         if (this.mail_no === '') {

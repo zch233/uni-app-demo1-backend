@@ -87,11 +87,12 @@
       }
     },
     watch: {
-      currentEditData: {
-        deep: true,
+      formVisible: {
         handler () {
-          const addressData = this.currentEditData.new ? {} : { addressData: [TextToCode[this.currentEditData.province].code, TextToCode[this.currentEditData.province][this.currentEditData.city].code, TextToCode[this.currentEditData.province][this.currentEditData.city][this.currentEditData.county].code] }
-          this.form = Object.assign({}, this.currentEditData, addressData)
+          if (this.formVisible) {
+            const addressData = this.currentEditData.new ? {} : { addressData: [TextToCode[this.currentEditData.province].code, TextToCode[this.currentEditData.province][this.currentEditData.city].code, TextToCode[this.currentEditData.province][this.currentEditData.city][this.currentEditData.county].code] }
+            this.form = Object.assign({}, this.currentEditData, addressData)
+          }
         }
       }
     },
