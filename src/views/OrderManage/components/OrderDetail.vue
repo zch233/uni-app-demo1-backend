@@ -48,10 +48,10 @@
               <div>订单备注：{{ currentEditData.in_remark || '无' }}</div>
             </el-col>
             <el-col :span="8">
-              <div>总价：{{ currentEditData.total_price }}</div>
               <div>商品小计：{{ currentEditData.goods_detail && currentEditData.goods_detail.map(v => (v.price * v.buy_number).toFixed(2) * 1).reduce((a, b) => a + b, 0) }}</div>
               <div v-if="currentEditData.coupon_price">优惠券：{{ currentEditData.coupon_price }}</div>
               <div>运费：0</div>
+              <div>总价：{{ currentEditData.total_price }}</div>
               <div>合计：{{ currentEditData.real_price }}</div>
             </el-col>
           </el-row>
