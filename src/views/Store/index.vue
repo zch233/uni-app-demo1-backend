@@ -14,14 +14,15 @@
       </el-col>
     </el-row>
     <el-form ref="searchForm" :inline="true" :model="searchForm">
-      <el-form-item label="日期：" prop="status">
+      <el-form-item label="日期：" prop="start_time_js">
         <el-date-picker
           v-model.number="searchForm.start_time_js"
           value-format="timestamp"
           type="date"
           placeholder="开始日期">
         </el-date-picker>
-        至
+      </el-form-item>
+      <el-form-item label="至" prop="end_time_js">
         <el-date-picker
           v-model.number="searchForm.end_time_js"
           value-format="timestamp"
