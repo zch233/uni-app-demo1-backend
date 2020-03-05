@@ -165,8 +165,19 @@
         this.$message({ message: '修改成功！', type: 'success' })
       },
       async issueCoupon ({ id }) {
-        await issueCoupon({ coupon_id: id })
-        this.$message({ message: '发放优惠券成功！', type: 'success' })
+        this.$confirm('点击确认将优惠券发放给所有用户, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(async () => {
+          await issueCoupon({ coupon_id: id })
+          this.$message({ message: '发放优惠券成功！', type: 'success' })
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消发放'
+          });          
+        });
       },
       showCouponEditForm (data) {
         this.couponEditFormVisible = true

@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="编辑商品" @closed="resetForm" width="800px" :visible.sync="formVisible" :close-on-click-modal="false" :show-close="false">
+  <el-dialog title="编辑操作员" @closed="resetForm" width="800px" :visible.sync="formVisible" :close-on-click-modal="false" :show-close="false">
     <el-form ref="form" :model="form" :rules="rules" label-width="80px">
       <el-row>
         <el-col :span="12">
@@ -9,12 +9,12 @@
         </el-col>
         <el-col :span="12">
           <el-form-item label="密码" prop="user_password">
-            <el-input v-model="form.user_password" placeholder="请输入操作员所属角色"></el-input>
+            <el-input v-model="form.user_password" placeholder="请输入操作员密码"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="所属角色" prop="role_id">
-            <el-select v-model.number="form.role_id" placeholder="请选择">
+            <el-select v-model.number="form.role_id" placeholder="请选择操作员所属角色">
               <el-option v-for="item in propsRoleList" :key="item.id" :label="item.name" :value="item.id"></el-option>
             </el-select>
           </el-form-item>
