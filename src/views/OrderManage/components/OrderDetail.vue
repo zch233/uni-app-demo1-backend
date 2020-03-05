@@ -181,6 +181,7 @@
         }).then(async ({ value }) => {
           await editOrder({ id: this.currentEditData.id, total_price: value })
           this.currentEditData.total_price = value
+          this.currentEditData.real_price = value
           this.$message({
             type: 'success',
             message: '改价成功'
