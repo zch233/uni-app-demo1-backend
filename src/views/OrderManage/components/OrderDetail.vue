@@ -9,7 +9,7 @@
           <p>订单编号：{{ currentEditData.order_id }}</p>
           <p>运单号（收）：{{ currentEditData.mailno1 || '暂无' }}</p>
           <p>运单号（发）：{{ currentEditData.mailno2 || '暂无' }}</p>
-          <p>付款方式：{{ currentEditData.status <= 1 ? '微信' : '未付款' }}</p>
+          <p>付款方式：微信</p>
           <p>买家：{{ currentEditData.nickname || '暂无' }}</p>
           <p>电话：{{ currentEditData.mobile || '暂无' }}</p>
           <p>收货地址：{{ (currentEditData.province + currentEditData.city + currentEditData.district + currentEditData.address) || '暂无' }}</p>
