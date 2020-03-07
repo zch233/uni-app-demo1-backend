@@ -66,13 +66,13 @@ export const routerMap = {
         path: 'store-coupon',
         name: 'StoreCoupon',
         component: () => import('@/views/CouponManage/index'),
-        meta: { title: '门店抵用券', icon: 'form', type: 1 }
+        meta: { title: '门店抵用券', icon: 'form', type: 2 }
       },
       {
         path: 'wash-coupon',
         name: 'WashCoupon',
         component: () => import('@/views/CouponManage/index'),
-        meta: { title: '洗涤抵用券', icon: 'form', type: 2 }
+        meta: { title: '洗涤抵用券', icon: 'form', type: 1 }
       }
     ]
   },
